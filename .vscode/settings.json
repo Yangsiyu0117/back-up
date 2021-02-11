@@ -1,0 +1,4 @@
+{
+    "python.pythonPath": "/home/xiaoyunwei/.pyenv/versions/env-name/bin/python",
+    "python.formatting.provider": "black"
+}

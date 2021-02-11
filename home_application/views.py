@@ -20,7 +20,7 @@ def home(request):
     """
     首页
     """
-    return render(request, "home_application/index_home.html")
+    return render(request, "home_application/index.html")
 
 
 def dev_guide(request):
@@ -35,3 +35,10 @@ def contact(request):
     联系页
     """
     return render(request, "home_application/contact.html")
+
+def history(request):
+    """
+    记录查看
+    """
+    back_up_list = BackUp.objects.all()
+    return render(request, "home_application/history.html" , {'data' : back_up_list})
