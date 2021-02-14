@@ -95,9 +95,11 @@
                     </li>
                     <li>
                         <div class="bk-form-content" style="padding: 10px;">
-                            <select name="" id="bk_biz_id" class="bk-form-select" style="width:100%;" placeholder="请选择">
-                                <option value="1">蓝鲸</option>
-                                <option value="2">中国</option>
+                            <select name="" id="bk_biz_select" class="bk-form-select" style="width:100%;"
+                                placeholder="请选择">
+                                <!--option value="1">蓝鲸</option-->
+                                <!--option value="2">中国</option-->
+                                <option value="">请选择</option>
                             </select>
                         </div>
                     </li>
@@ -221,7 +223,6 @@
         var site_url = "${SITE_URL}";			// app的url前缀,在ajax调用的时候，应该加上该前缀
         var static_url = "${STATIC_URL}";
     </script>
-
     <!--统计js  勿删-->
     <script src="https://magicbox.bk.tencent.com/static_api/analysis.js?v=${ STATIC_VERSION }"></script>
     <script src="${STATIC_URL}js/csrftoken.js?v=${ STATIC_VERSION }"></script>
@@ -233,7 +234,17 @@
         (function () {
             // javascript代码中直接导入数据
             // https://www.jstree.com/docs/json/
-
+            $.ajax({
+                url: site_url + "api/search_business/",
+                type: "get",
+                success: function (data) {
+                    $.each(data['results'], function (index, item) {
+                        $("#bk_biz_select").apppend(
+                            "<option value=" + item.id + ">" + item.name + "</option>"
+                        );
+                    });
+                },
+            });
             $("#bk_biz_id").change(function (e) {
 
                 // TODO: 请求后台，查询业务下的拓扑

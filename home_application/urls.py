@@ -19,5 +19,6 @@ urlpatterns = (
     url(r"^$", views.home),
     url(r"^dev-guide/$", views.dev_guide),
     url(r"^contact/$", views.contact),
-    url(r"^histoty/$", views.history),
+    url(r"^history/$", views.history),
+    url(r"^api/search_business/$", views.search_business),
 )

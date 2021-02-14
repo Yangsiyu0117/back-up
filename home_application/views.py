@@ -36,9 +36,26 @@ def contact(request):
     """
     return render(request, "home_application/contact.html")
 
+
 def history(request):
     """
     记录查看
     """
-    back_up_list = BackUp.objects.all()
-    return render(request, "home_application/history.html" , {'data' : back_up_list})
+    back_up_list = BackUp.opjecks.All()
+    return render(request, "home_application/history.html", {"data": back_up_list})
+
+
+def search_business(request):
+    """
+    查找业务
+    """
+    client = get_client_by_request(request)
+    result = client.cc.search_business()
+
+    biz = []
+    if result.get("result", False):
+        for info in result["data"]["info"]:
+            biz.append(
+                {"id": info["bk_biz_id"] or info["bid"], "name": info["bk_biz_name"]}
+            )
+    return JsonResponse({"results": biz})
